@@ -21,6 +21,7 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			const url = "https://dashboard-management-tan.vercel.app/api/users";
+			
 			const { data: res } = await axios.post(url, data);
 			setMsg(res.message);
 		} catch (error) {
