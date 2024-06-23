@@ -12,7 +12,7 @@ const EmailVerify = () => {
     useEffect(() => {
         const verifyEmailUrl = async () => {
             try {
-                const url = "https://dashboard-management-tan.vercel.app/api/users/${param.id}/verify/${param.token}";
+                const url = `https://dashboard-management-tan.vercel.app/api/users/${param.id}/verify/${param.token}`;
                 const { data } = await axios.get(url);
                 console.log(data);
                 setValidUrl(true);
