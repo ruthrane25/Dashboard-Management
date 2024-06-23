@@ -20,7 +20,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = `/api/users`;
+			const url = "https://dashboard-management-tan.vercel.app/api/users";
 			const { data: res } = await axios.post(url, data);
 			setMsg(res.message);
 		} catch (error) {
@@ -41,7 +41,7 @@ const Signup = () => {
 					<h1>Welcome Back</h1>
 					<Link to="/login">
 						<button type="button" className={styles.white_btn}>
-							Sign in
+							Sing in
 						</button>
 					</Link>
 				</div>
@@ -87,7 +87,7 @@ const Signup = () => {
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
-							Sign Up
+							Sing Up
 						</button>
 					</form>
 				</div>
