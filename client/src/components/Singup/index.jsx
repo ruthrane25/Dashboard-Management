@@ -20,8 +20,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = `${process.env.REACT_APP_API_URL}/api/users`;
-			
+			const url = `/api/users`;
 			const { data: res } = await axios.post(url, data);
 			setMsg(res.message);
 		} catch (error) {
