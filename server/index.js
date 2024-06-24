@@ -6,6 +6,7 @@ const connection = require("./db");
 const path = require('path');
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const passwordResetRoutes = require("./routes/passwordReset");
 
 // database connection
 connection();
@@ -17,6 +18,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/password-reset", passwordResetRoutes);
 
 app.use(express.static(path.join(__dirname,"build")));
 app.get("/*",(req, res) =>{

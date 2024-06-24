@@ -101,3 +101,33 @@
 	color: white;
 	margin: 10px;
 }
+
+/* new css */
+
+
+.radio_group {
+	display: flex;
+	gap: 20px;
+}
+
+.radio_input {
+	margin-right: 10px;
+}
+
+.gender_group {
+	margin-bottom: 20px;
+}
+
+.gender_label {
+	margin-bottom: 5px;
+	display: block;
+}
+
+.radio_label {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+}
+
+
+
