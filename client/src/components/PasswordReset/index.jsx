@@ -8,6 +8,7 @@ const PasswordReset = () => {
 	const [password, setPassword] = useState("");
 	const [msg, setMsg] = useState("");
 	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(true); // Initialize to true to show loader initially
 	const param = useParams();
 	const url = `http://localhost:8080/api/password-reset/${param.id}/${param.token}`;
 
@@ -18,6 +19,8 @@ const PasswordReset = () => {
 				setValidUrl(true);
 			} catch (error) {
 				setValidUrl(false);
+			} finally {
+				setLoading(false); // Hide loader after URL verification
 			}
 		};
 		verifyUrl();
@@ -25,6 +28,7 @@ const PasswordReset = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true); // Show loader on form submission
 		try {
 			const { data } = await axios.post(url, { password });
 			setMsg(data.message);
@@ -39,33 +43,39 @@ const PasswordReset = () => {
 				setError(error.response.data.message);
 				setMsg("");
 			}
+		} finally {
+			setLoading(false); // Hide loader after request completion
 		}
 	};
 
 	return (
 		<Fragment>
-			{validUrl ? (
-				<div className={styles.container}>
-					<form className={styles.form_container} onSubmit={handleSubmit}>
-						<h1>Add New Password</h1>
-						<input
-							type="password"
-							placeholder="Password"
-							name="password"
-							onChange={(e) => setPassword(e.target.value)}
-							value={password}
-							required
-							className={styles.input}
-						/>
-						{error && <div className={styles.error_msg}>{error}</div>}
-						{msg && <div className={styles.success_msg}>{msg}</div>}
-						<button type="submit" className={styles.green_btn}>
-							Submit
-						</button>
-					</form>
-				</div>
+			{loading ? (
+				<div className={styles.loader}></div> // Render loader during loading state
 			) : (
-				<h1>404 Not Found</h1>
+				validUrl ? (
+					<div className={styles.container}>
+						<form className={styles.form_container} onSubmit={handleSubmit}>
+							<h1>Add New Password</h1>
+							<input
+								type="password"
+								placeholder="Password"
+								name="password"
+								onChange={(e) => setPassword(e.target.value)}
+								value={password}
+								required
+								className={styles.input}
+							/>
+							{error && <div className={styles.error_msg}>{error}</div>}
+							{msg && <div className={styles.success_msg}>{msg}</div>}
+							<button type="submit" className={styles.green_btn}>
+								Submit
+							</button>
+						</form>
+					</div>
+				) : (
+					<h1>404 Not Found</h1>
+				)
 			)}
 		</Fragment>
 	);
