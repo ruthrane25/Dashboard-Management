@@ -14,9 +14,14 @@ const Signup = () => {
     });
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     const validateMobile = (mobile) => {
@@ -82,15 +87,24 @@ const Signup = () => {
                             required
                             className={styles.input}
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            name="password"
-                            onChange={handleChange}
-                            value={data.password}
-                            required
-                            className={styles.input}
-                        />
+                        <div className={styles.password_field}>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                name="password"
+                                onChange={handleChange}
+                                value={data.password}
+                                required
+                                className={styles.input}
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className={styles.password_toggle}
+                            >
+                                {showPassword ? "👁️" : "👁️‍🗨️"}
+                            </button>
+                        </div>
                         <input
                             type="text"
                             placeholder="Mobile Number"
@@ -113,44 +127,18 @@ const Signup = () => {
                             <option value="warehouse">WAREHOUSE</option>
                             <option value="operation">OPERATION</option>
                         </select>
-                        <div className={styles.gender_group}>
-                            <label className={styles.gender_label}>Gender</label>
-                            <div className={styles.radio_group}>
-                                <label className={styles.radio_label}>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="male"
-                                        onChange={handleChange}
-                                        required
-                                        className={styles.radio_input}
-                                    />
-                                    Male
-                                </label>
-                                <label className={styles.radio_label}>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="female"
-                                        onChange={handleChange}
-                                        required
-                                        className={styles.radio_input}
-                                    />
-                                    Female
-                                </label>
-                                <label className={styles.radio_label}>
-                                    <input
-                                        type="radio"
-                                        name="gender"
-                                        value="other"
-                                        onChange={handleChange}
-                                        required
-                                        className={styles.radio_input}
-                                    />
-                                    Other
-                                </label>
-                            </div>
-                        </div>
+                        <select
+                            name="gender"
+                            onChange={handleChange}
+                            value={data.gender}
+                            required
+                            className={styles.input}
+                        >
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                         {error && <div className={styles.error_msg}>{error}</div>}
                         {msg && <div className={styles.success_msg}>{msg}</div>}
                         <button type="submit" className={styles.green_btn}>

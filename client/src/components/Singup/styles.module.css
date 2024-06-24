@@ -129,5 +129,24 @@
 	margin-right: 20px;
 }
 
+.password_field {
+    position: relative;
+    width: 100%;
+}
 
+.password_field input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.password_toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
 
